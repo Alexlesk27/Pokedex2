@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
-import com.example.pokedex.model.Pokemon
 
 class HomeAdapter(
     var item : List<String> ,
@@ -21,20 +20,15 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
       val name = item[position]
-        holder.titulo .text = name
-
+        holder.title.text = name
     }
 
     override fun getItemCount(): Int {
        return item.size
     }
 
-    inner class HomeViewHolder( binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
-         val titulo = binding.title
+    inner class HomeViewHolder(binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
+         val title = binding.title
+    }
 
-    }
-    fun submitList(list: List<String>) {
-        item
-        notifyDataSetChanged()
-    }
 }

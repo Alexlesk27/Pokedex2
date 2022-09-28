@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,11 +42,10 @@ class HomeFragment : Fragment() {
         val recyclerView = binding.homeRecylerview
         recyclerView.layoutManager = LinearLayoutManager(
             activity,
-            GridLayoutManager.VERTICAL, false
+            LinearLayoutManager.VERTICAL, false
         )
         homeAdapter = HomeAdapter(it, requireContext())
         recyclerView.adapter = homeAdapter
     }
-
 
 }
