@@ -1,6 +1,6 @@
 package com.example.pokedex.di
 import org.koin.androidx.viewmodel.dsl.viewModel
-import com.example.pokedex.features.HomeViewmodel
+import com.example.pokedex.features.home.HomeViewmodel
 import org.koin.dsl.module
 
 
