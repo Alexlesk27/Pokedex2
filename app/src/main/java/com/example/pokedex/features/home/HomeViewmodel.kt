@@ -42,7 +42,8 @@ class HomeViewmodel() : ViewModel() {
                     "Bulbasaur",
                     "Ivysaur",
                     "Charmander",
-                    "Croconaw"
+                    "Croconaw",
+
                 )
                 emit(ResponseState.Success(response))
             } catch (erro: Exception) {

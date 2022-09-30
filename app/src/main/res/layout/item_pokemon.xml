@@ -25,8 +25,8 @@
                 android:layout_centerHorizontal="true"
                 android:text="Título da Live"
                 android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="15sp"
+                android:textColor="#FF9800"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText,SpUsage" />
 
             <ImageView
