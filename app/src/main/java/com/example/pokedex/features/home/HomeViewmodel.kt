@@ -1,7 +1,5 @@
 package com.example.pokedex.features.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.model.ListState
@@ -11,8 +9,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewmodel() : ViewModel() {
 
-    private var _home = MutableStateFlow<ListState<List<String>>>(ListState.New)
-    val home: StateFlow<ListState<List<String>>> = _home
+    private var _pokemon = MutableStateFlow<ListState<List<String>>>(ListState.New)
+    val pokemon: StateFlow<ListState<List<String>>> = _pokemon
 
     init {
        getPokemon()
@@ -20,10 +18,10 @@ class HomeViewmodel() : ViewModel() {
 
   private fun getPokemon() {
         viewModelScope.launch {
-            getListFlow().collect {
+            getList().collect {
                 when (it) {
                     is ResponseState.Success -> {
-                        _home.value = ListState.Success(it.value)
+                        _pokemon.value = ListState.Success(it.value)
                     }
 
                     else -> {
@@ -34,7 +32,7 @@ class HomeViewmodel() : ViewModel() {
         }
     }
 
- private fun getListFlow(): Flow<HomeViewmodel.ResponseState<List<String>>> {
+ private fun getList(): Flow<ResponseState<List<String>>> {
         return flow {
             try {
                 val response = arrayListOf(
@@ -51,7 +49,6 @@ class HomeViewmodel() : ViewModel() {
             }
         }.flowOn(Dispatchers.IO)
     }
-
 
     sealed class ResponseState<out T> {
         data class Success<out T>(val value: T) : ResponseState<T>()

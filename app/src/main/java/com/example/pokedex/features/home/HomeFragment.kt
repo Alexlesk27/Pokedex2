@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private fun observerList() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.home.collect() {
+                homeViewModel.pokemon.collect() {
                     when (it) {
                         is ListState.Success -> {
                             iniReciclerview(it)

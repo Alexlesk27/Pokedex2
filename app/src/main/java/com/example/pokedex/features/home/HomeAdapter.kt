@@ -1,6 +1,7 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,6 +24,7 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val name = item[position]
         holder.title.text = name
+        Log.i("pokemom", "$item")
     }
 
     override fun getItemCount(): Int {
