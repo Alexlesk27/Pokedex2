@@ -24,7 +24,6 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val name = item[position]
         holder.title.text = name
-        Log.i("pokemom", "$item")
     }
 
     override fun getItemCount(): Int {
