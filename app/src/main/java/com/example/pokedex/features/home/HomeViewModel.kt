@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.pokedex.model.ListState
 import kotlinx.coroutines.flow.*
 
-
 class HomeViewModel() : ViewModel() {
 
     private var _pokemon = MutableStateFlow<ListState<List<String>>>(ListState.New)
