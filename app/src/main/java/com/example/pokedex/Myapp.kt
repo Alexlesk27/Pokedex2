@@ -1,6 +1,7 @@
 package com.example.pokedex
 
 import android.app.Application
+import com.example.pokedex.di.repositoryModule
 import com.example.pokedex.di.useCaseModule
 import com.example.pokedex.di.viewModelHome
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +19,8 @@ class Myapp: Application() {
             androidContext(this@Myapp)
             modules(
                 viewModelHome,
-                useCaseModule
+                useCaseModule,
+                repositoryModule
             )
         }
     }
