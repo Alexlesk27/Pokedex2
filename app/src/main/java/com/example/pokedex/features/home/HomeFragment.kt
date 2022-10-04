@@ -25,10 +25,12 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        iniReciclerview()
         observerList()
     }
 
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
                 homeViewModel.pokemon.collect() {
                     when (it) {
                         is ListState.Success -> {
-                            iniReciclerview(it)
+                           homeAdapter.submitList(it.value)
                         }
                         else -> {
 
@@ -49,13 +51,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun iniReciclerview(it: ListState.Success<List<String>>) {
+    private fun iniReciclerview() {
         val recyclerView = binding.pokemonListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.VERTICAL, false
         )
-        homeAdapter = HomeAdapter(it.value, requireContext())
+        homeAdapter = HomeAdapter(requireContext())
         recyclerView.adapter = homeAdapter
     }
 }
