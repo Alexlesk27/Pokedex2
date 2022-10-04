@@ -1,6 +1,7 @@
 package com.example.pokedex
 
 import android.app.Application
+import com.example.pokedex.di.useCaseModule
 import com.example.pokedex.di.viewModelHome
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -16,7 +17,8 @@ class Myapp: Application() {
             androidLogger(Level.NONE)
             androidContext(this@Myapp)
             modules(
-                viewModelHome
+                viewModelHome,
+                useCaseModule
             )
         }
     }

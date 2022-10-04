@@ -1,10 +1,14 @@
 package com.example.pokedex.features.home
 
 import androidx.lifecycle.ViewModel
+import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
 import com.example.pokedex.model.ListState
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel(
+    val listPokemon: GetListPokemonUseCaseInterface
+) : ViewModel() {
 
     private var _pokemon = MutableStateFlow<ListState<List<String>>>(ListState.New)
     val pokemon: StateFlow<ListState<List<String>>> = _pokemon
@@ -14,16 +18,7 @@ class HomeViewModel() : ViewModel() {
     }
 
     private fun getPokemon() {
-        _pokemon.value = ListState.Success(getList())
+        _pokemon.value = ListState.Success(listPokemon.execute())
     }
 
-    private fun getList(): List<String> {
-        return listOf(
-            "pikachu",
-            "Bulbasaur",
-            "Ivysaur",
-            "Charmander",
-            "Croconaw",
-        )
-    }
 }
