@@ -1,11 +1,11 @@
 package com.example.pokedex.di
 
 import com.example.pokedex.ApiRest.PokemonApi
+import com.example.pokedex.ApiRest.repository.GetPokemonRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import com.example.pokedex.features.home.HomeViewModel
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCase
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
-import com.example.pokedex.repository.GetListPokemonRepository
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -61,6 +61,6 @@ val viewModelHome = module {
 
 val repositoryModule = module {
     single{
-        GetListPokemonRepository(get())
+        GetPokemonRepository(get())
     }
 }

@@ -1,33 +1,33 @@
 package com.example.pokedex.features.home.useCase
 
 import com.example.pokedex.ApiRest.repository.GetPokemonRepository
-import com.example.pokedex.model.PokemonResponse
-
-import kotlinx.coroutines.Dispatchers
+import com.example.pokedex.model.PokemonDetails
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
-interface GetListPokemonUseCaseInterface {
-    suspend fun execute(): Flow<GetListPokemonUseCase.ResponseState<PokemonResponse>>
+interface GetPokemonDetailUsecaseInterface {
+    suspend fun execute(name: String): Flow<GetPokemonDetailUsecase.ResponseState<PokemonDetails>>
 }
 
-class GetListPokemonUseCase(
+class GetPokemonDetailUsecase(
     private val pokemonRepository: GetPokemonRepository
-):GetListPokemonUseCaseInterface  {
-    override suspend fun execute():Flow<ResponseState<PokemonResponse>> {
+):GetPokemonDetailUsecaseInterface {
+
+    override suspend fun execute(name: String): Flow<ResponseState<PokemonDetails>> {
         return flow {
             try {
-                val response = pokemonRepository.getListPokemon()
+                val response = pokemonRepository.getDetailsPokemon(name)
                 emit(ResponseState.Success(response))
-            } catch (error : Exception){
+            }catch (error: Exception){
                 emit(ResponseState.Error(error))
             }
-        }.flowOn(Dispatchers.IO)
+        }
     }
 
     sealed class ResponseState<out T> {
         data class Success<out T>(val value: T) : ResponseState<T>()
         data class Error(val error: Throwable) : ResponseState<Nothing>()
+
     }
+
 }

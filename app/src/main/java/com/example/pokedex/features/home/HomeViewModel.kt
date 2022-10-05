@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCase
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
+import com.example.pokedex.features.home.useCase.GetPokemonDetailUsecaseInterface
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
 import kotlinx.coroutines.flow.*
@@ -32,5 +33,4 @@ init {
            }
        }
     }
-
 }
