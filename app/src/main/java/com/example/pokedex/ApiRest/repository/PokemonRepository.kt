@@ -4,7 +4,7 @@ import com.example.pokedex.ApiRest.PokemonApi
 import com.example.pokedex.model.PokemonDetails
 import com.example.pokedex.model.PokemonResponse
 
-class GetPokemonRepository(
+class PokemonRepository(
     private val pokemonApi: PokemonApi
 ) {
 

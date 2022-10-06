@@ -16,6 +16,6 @@ interface PokemonApi {
     ):PokemonDetails
 
     companion object {
-        const val BASE_URL = "https://pokeapi.co/api/v2/"
+         val BASE_URL = "https://pokeapi.co/api/v2/"
     }
 }

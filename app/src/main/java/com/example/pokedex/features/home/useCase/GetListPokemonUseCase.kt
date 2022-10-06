@@ -1,7 +1,8 @@
 package com.example.pokedex.features.home.useCase
 
-import com.example.pokedex.ApiRest.repository.GetPokemonRepository
+import com.example.pokedex.ApiRest.repository.PokemonRepository
 import com.example.pokedex.model.PokemonResponse
+import com.example.pokedex.model.ResponseState
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -9,11 +10,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 interface GetListPokemonUseCaseInterface {
-    suspend fun execute(): Flow<GetListPokemonUseCase.ResponseState<PokemonResponse>>
+    suspend fun execute(): Flow<ResponseState<PokemonResponse>>
 }
 
 class GetListPokemonUseCase(
-    private val pokemonRepository: GetPokemonRepository
+    private val pokemonRepository: PokemonRepository
 ):GetListPokemonUseCaseInterface  {
     override suspend fun execute():Flow<ResponseState<PokemonResponse>> {
         return flow {
@@ -26,8 +27,4 @@ class GetListPokemonUseCase(
         }.flowOn(Dispatchers.IO)
     }
 
-    sealed class ResponseState<out T> {
-        data class Success<out T>(val value: T) : ResponseState<T>()
-        data class Error(val error: Throwable) : ResponseState<Nothing>()
-    }
 }

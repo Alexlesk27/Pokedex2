@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        iniReciclerview()
+        iniRecyclerView()
         observerList()
     }
 
@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun iniReciclerview() {
+    private fun iniRecyclerView() {
         val recyclerView = binding.pokemonListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(
             activity,
