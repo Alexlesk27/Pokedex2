@@ -1,7 +1,6 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
+import com.example.pokedex.support.URI_IMAGE_Pokemon
 import com.squareup.picasso.Picasso
 
 class HomeAdapter(
@@ -32,11 +32,10 @@ class HomeAdapter(
 
         fun bind(pokemon: Pokemon) {
             name.text = pokemon.name
-            Picasso.get().load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/back/1.png",).into(image);
+            Picasso.get().load(URI_IMAGE_Pokemon).into(image);
 
        }
     }
-
 
     class HomeCallback : DiffUtil.ItemCallback<Pokemon>() {
         override fun areItemsTheSame(

@@ -10,9 +10,4 @@ class PokemonRepository(
     suspend fun getListPokemon(): PokemonResponse {
         return pokemonApi.getPokemon()
     }
-
-    suspend fun getDetailsPokemon(name: String): PokemonDetails{
-        return pokemonApi.getDetailsPokemon(name)
-    }
-
 }

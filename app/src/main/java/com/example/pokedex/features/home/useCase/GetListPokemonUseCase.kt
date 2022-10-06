@@ -26,5 +26,4 @@ class GetListPokemonUseCase(
             }
         }.flowOn(Dispatchers.IO)
     }
-
 }

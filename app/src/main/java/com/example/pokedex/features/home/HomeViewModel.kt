@@ -19,14 +19,19 @@ class HomeViewModel(
 init {
     getPokemon()
 }
+
     private fun getPokemon() {
        viewModelScope.launch {
-           listPokemon.execute().collect{
+           listPokemon.execute().onStart {
+               _pokemon.value = ListState.Loading
+           }.collect{
                when(it){
                    is ResponseState.Success->{
                        _pokemon.value = ListState.Success(it.value.pokemon)
                    }
-                   is ResponseState.Error->{}
+                   is ResponseState.Error->{
+                       _pokemon.value = ListState.Error()
+                   }
                }
            }
        }
