@@ -9,12 +9,4 @@ interface PokemonApi {
     suspend fun getPokemon(
     ):PokemonResponse
 
-    @GET("pokemon/{name}")
-    suspend fun getDetailsPokemon(
-        @Path("name") name: String
-    ):PokemonDetails
-
-    companion object {
-         val BASE_URL = "https://pokeapi.co/api/v2/"
-    }
 }
