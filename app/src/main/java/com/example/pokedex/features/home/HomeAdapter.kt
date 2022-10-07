@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.support.URI_IMAGE_Pokemon
+import com.example.pokedex.support.URI_IMAGE_POKEMON
 import com.squareup.picasso.Picasso
 
 class HomeAdapter(
@@ -32,7 +32,7 @@ class HomeAdapter(
 
         fun bind(pokemon: Pokemon) {
             name.text = pokemon.name
-            Picasso.get().load(URI_IMAGE_Pokemon).into(image);
+            Picasso.get().load(URI_IMAGE_POKEMON).into(image);
 
        }
     }

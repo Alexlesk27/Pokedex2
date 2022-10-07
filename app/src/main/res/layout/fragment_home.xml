@@ -17,18 +17,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_pokemon" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="179dp"
-            android:layout_marginTop="297dp"
-            android:layout_marginEnd="184dp"
-            android:layout_marginBottom="-345dp"
-            android:indeterminateDrawable="@drawable/progress_bar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="UnknownId" />
+    <ProgressBar
+        android:id="@+id/progressBar_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_marginTop="297dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="-345dp"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UnknownId" />
 
 </RelativeLayout>
