@@ -2,7 +2,7 @@ package com.example.pokedex.features.home.useCase
 
 import com.example.pokedex.ApiRest.repository.PokemonRepository
 import com.example.pokedex.model.PokemonResponse
-import com.example.pokedex.model.ResponseState
+import com.example.pokedex.support.ResponseState
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

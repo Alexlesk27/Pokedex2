@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.model.ResponseState
+import com.example.pokedex.support.ResponseState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

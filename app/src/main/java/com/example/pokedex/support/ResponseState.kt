@@ -1,4 +1,4 @@
-package com.example.pokedex.model
+package com.example.pokedex.support
 
 sealed class ResponseState<out T> {
     data class Success<out T>(val value: T) : ResponseState<T>()
