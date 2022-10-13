@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.ListState
+import com.example.pokedex.support.setVisible
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,10 +27,12 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerview()
         observerList()
     }
 
@@ -38,7 +42,15 @@ class HomeFragment : Fragment() {
                 homeViewModel.pokemon.collect() {
                     when (it) {
                         is ListState.Success -> {
-                            iniReciclerview(it)
+                            homeAdapter.submitList(it.value)
+                            showLoading(false)
+                        }
+                        is ListState.Error -> {
+                            showLoading(false)
+                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                        }
+                        is ListState.Loading -> {
+                            showLoading(true)
                         }
                         else -> {
 
@@ -49,13 +61,17 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun iniReciclerview(it: ListState.Success<List<String>>) {
+    private fun initRecyclerview() {
         val recyclerView = binding.pokemonListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.VERTICAL, false
         )
-        homeAdapter = HomeAdapter(it.value, requireContext())
+        homeAdapter = HomeAdapter(requireContext())
         recyclerView.adapter = homeAdapter
+    }
+
+    private fun showLoading(state: Boolean) {
+        binding.progressBarContainer.setVisible(state)
     }
 }

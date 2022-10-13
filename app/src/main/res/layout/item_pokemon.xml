@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#9cfca9"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,22 +15,22 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/name_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/thumbnail"
+                android:layout_below="@id/image"
                 android:layout_centerHorizontal="true"
                 android:text="Título da Live"
                 android:textAlignment="center"
-                android:textColor="#FF9800"
+                android:textColor="#F44336"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,SpUsage" />
 
             <ImageView
-                android:id="@+id/thumbnail"
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:src="@drawable/pokemon"

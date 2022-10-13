@@ -1,7 +1,6 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,9 +10,8 @@ import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
 
 class HomeAdapter(
-    var item: List<String>,
     private var context: Context
-) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
+) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -22,27 +20,29 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val name = item[position]
-        holder.title.text = name
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return item.size
-    }
-
-    inner class HomeViewHolder(binding: ItemPokemonBinding) :
+    inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val title = binding.title
+        private val name = binding.nameTextView
+        private val image = binding.image
+
+        fun bind(pokemon: Pokemon) {
+            name.text = pokemon.name
+
+       }
     }
 
-    class HomeCallback: DiffUtil.ItemCallback<Pokemon>() {
-        override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon
+    class HomeCallback : DiffUtil.ItemCallback<Pokemon>() {
+        override fun areItemsTheSame(
+            oldItem: Pokemon, newItem: Pokemon
         ): Boolean {
-           return oldItem.name == newItem.name
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-            return oldItem.name== newItem.name
+            return oldItem.name == newItem.name
         }
     }
 }
