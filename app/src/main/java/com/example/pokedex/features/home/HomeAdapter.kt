@@ -1,6 +1,7 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,8 @@ import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
 
 class HomeAdapter(
-    private var context: Context
+    private var context: Context,
+    val onclick : (Pokemon) -> Unit
 ) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -30,7 +32,10 @@ class HomeAdapter(
 
         fun bind(pokemon: Pokemon) {
             name.text = pokemon.name
-
+            Log.i("Pokemon", "Api ${getItem(absoluteAdapterPosition)}")
+            binding.root.setOnClickListener {
+                onclick(pokemon)
+            }
        }
     }
 

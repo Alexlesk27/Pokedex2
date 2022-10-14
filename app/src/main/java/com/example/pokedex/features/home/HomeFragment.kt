@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.ListState
 import com.example.pokedex.support.setVisible
@@ -67,11 +69,18 @@ class HomeFragment : Fragment() {
             activity,
             LinearLayoutManager.VERTICAL, false
         )
-        homeAdapter = HomeAdapter(requireContext())
+        homeAdapter = HomeAdapter(requireContext()){
+          goToDetailPokemon()
+        }
         recyclerView.adapter = homeAdapter
     }
 
     private fun showLoading(state: Boolean) {
         binding.progressBarContainer.setVisible(state)
+    }
+
+    private fun goToDetailPokemon(){
+        findNavController().navigate(R.id.action_homeFragment_to_detailsFragment)
+
     }
 }
