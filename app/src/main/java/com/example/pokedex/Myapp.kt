@@ -2,6 +2,7 @@ package com.example.pokedex
 
 import android.app.Application
 import com.example.pokedex.di.*
+import com.example.pokedex.features.details.PokemonDetailsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -21,6 +22,7 @@ class Myapp: Application() {
                 apiModule,
                 useCaseModule,
                 repositoryModule,
+                viewModelPokemonDetails
             )
         }
     }

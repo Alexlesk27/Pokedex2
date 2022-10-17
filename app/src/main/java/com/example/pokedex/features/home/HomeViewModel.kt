@@ -2,6 +2,7 @@ package com.example.pokedex.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pokedex.ApiRest.repository.PokemonRepository
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
@@ -16,6 +17,7 @@ class HomeViewModel(
 
     private var _pokemon = MutableStateFlow<ListState<List<Pokemon>>>(ListState.New)
     val pokemon: StateFlow<ListState<List<Pokemon>>> = _pokemon.asStateFlow()
+
 
 init {
     getPokemon()
@@ -38,4 +40,5 @@ init {
            }
        }
     }
+
 }

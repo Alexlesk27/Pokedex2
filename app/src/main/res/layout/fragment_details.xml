@@ -1,83 +1,280 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9cfca9">
+    android:background="#03A9F4">
 
-
-    <ImageView
-        android:id="@+id/backdrop_path"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragmentPokemonDetails"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:alpha="0.8"
-        android:scaleType="centerCrop"
-        android:src="@drawable/pokemonlog"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/image_detail"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@id/backdrop_path"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-16dp"
-        android:layout_marginEnd="139dp"
-        android:src="@drawable/pokemon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titleDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/image_detail"
-        android:layout_alignStart="@+id/image_detail"
-        android:layout_alignEnd="@+id/image_detail"
-        android:layout_marginStart="-127dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="-135dp"
-        android:fontFamily="@font/silkscreenbold"
-        android:lineSpacingExtra="3dp"
-        android:text="pikachu"
-        android:textAlignment="center"
-        android:textColor="#F44336"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_detail"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/descricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titleDetail"
-        android:layout_alignStart="@+id/image_detail"
-        android:layout_alignEnd="@+id/image_detail"
-        android:layout_marginStart="-140dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="-139dp"
-        android:lineSpacingExtra="3dp"
-        android:text="Descrição"
-        android:textAlignment="center"
-        android:textColor="#F44336"
-        android:textSize="16dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <TextView
-        android:id="@+id/descripition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/descricao"
-        android:layout_alignStart="@+id/image_detail"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-122dp"
-        android:layout_marginEnd="-1dp"
-        android:lineSpacingExtra="3dp"
-        android:text="     Pikachu que pode gerar eletricidade poderosa  tem bolsas nas bochechas que são extra macias e super elásticas."
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        android:layout_height="wrap_content">
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/id_pokemon_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="N : "
+            app:layout_constraintBottom_toTopOf="@+id/image_pokemon_details"
+            app:layout_constraintStart_toStartOf="@+id/image_pokemon_details"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/id_pokemon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/image_pokemon_details"
+            app:layout_constraintEnd_toEndOf="@+id/image_pokemon_details"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/id_pokemon_title"
+            tools:ignore="MissingConstraints" />
+
+
+        <ImageView
+            android:id="@+id/image_pokemon_details"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="92dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+
+        <TextView
+            android:id="@+id/type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="Tipo :"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/image_pokemon_details"
+            app:layout_constraintHorizontal_bias="0.288"
+            app:layout_constraintStart_toStartOf="@+id/image_pokemon_details"
+            app:layout_constraintTop_toBottomOf="@+id/image_pokemon_details" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/image_pokemon_details"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/type_title"
+            app:layout_constraintTop_toBottomOf="@+id/name_pokemon"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/name_pokemon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/image_pokemon_details"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="@+id/image_pokemon_details"
+            app:layout_constraintTop_toBottomOf="@+id/image_pokemon_details" />
+
+        <TextView
+            android:id="@+id/speedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Speed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarspDefense" />
+
+        <TextView
+            android:id="@+id/hpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="HP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_title" />
+
+        <ProgressBar
+            android:id="@+id/progressBarHP"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hpTitle" />
+
+        <TextView
+            android:id="@+id/hpValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarHP"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/attackTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Attack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarHP" />
+
+        <ProgressBar
+            android:id="@+id/progressBarAttack"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/attackTitle" />
+
+        <TextView
+            android:id="@+id/attackValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarAttack"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/defenseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Defense"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarAttack" />
+
+        <ProgressBar
+            android:id="@+id/progressBarDefense"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/defenseTitle" />
+
+        <TextView
+            android:id="@+id/defenseValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarDefense"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/spAttackTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Special Attack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarDefense" />
+
+        <ProgressBar
+            android:id="@+id/progressBarspAttack"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spAttackTitle" />
+
+        <TextView
+            android:id="@+id/spAttackValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarspAttack"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/spDefenseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Special Defense"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarspAttack" />
+
+        <ProgressBar
+            android:id="@+id/progressBarspDefense"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spDefenseTitle" />
+
+        <TextView
+            android:id="@+id/spDefenseValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarspDefense"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/speedValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarSpeed"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSpeed"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/speedTitle"
+            tools:ignore="UnknownId" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress_bar"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBarAttack"
+            app:layout_constraintEnd_toEndOf="@+id/image_pokemon_details"
+            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintStart_toStartOf="@+id/image_pokemon_details"
+            app:layout_constraintTop_toBottomOf="@+id/image_pokemon_details"
+            app:layout_constraintVertical_bias="0.565"
+            tools:ignore="MissingConstraints,UnknownId" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

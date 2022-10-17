@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.ListState
+import com.example.pokedex.model.Pokemon
+import com.example.pokedex.model.PokemonsResult
 import com.example.pokedex.support.setVisible
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -70,7 +72,7 @@ class HomeFragment : Fragment() {
             LinearLayoutManager.VERTICAL, false
         )
         homeAdapter = HomeAdapter(requireContext()){
-          goToDetailPokemon()
+          goToDetailPokemon(it)
         }
         recyclerView.adapter = homeAdapter
     }
@@ -79,8 +81,8 @@ class HomeFragment : Fragment() {
         binding.progressBarContainer.setVisible(state)
     }
 
-    private fun goToDetailPokemon(){
-        findNavController().navigate(R.id.action_homeFragment_to_detailsFragment)
-
+    private fun goToDetailPokemon(pokemon: Pokemon){
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(pokemon.name)
+        findNavController().navigate(action)
     }
 }

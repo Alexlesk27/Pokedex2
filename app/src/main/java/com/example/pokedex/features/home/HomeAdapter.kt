@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
+import com.example.pokedex.model.PokemonResponse
+import com.example.pokedex.model.PokemonsResult
+import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
@@ -28,11 +31,10 @@ class HomeAdapter(
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val name = binding.nameTextView
-        private val image = binding.image
 
         fun bind(pokemon: Pokemon) {
             name.text = pokemon.name
-            Log.i("Pokemon", "Api ${getItem(absoluteAdapterPosition)}")
+
             binding.root.setOnClickListener {
                 onclick(pokemon)
             }

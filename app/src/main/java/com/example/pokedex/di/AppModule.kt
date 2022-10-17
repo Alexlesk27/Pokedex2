@@ -2,6 +2,9 @@ package com.example.pokedex.di
 
 import com.example.pokedex.ApiRest.PokemonApi
 import com.example.pokedex.ApiRest.repository.PokemonRepository
+import com.example.pokedex.features.details.PokemonDetailsViewModel
+import com.example.pokedex.features.details.useCase.GetDetailPokemonUseCase
+import com.example.pokedex.features.details.useCase.GetDetailPokemonUseCaseInterface
 import org.koin.androidx.viewmodel.dsl.viewModel
 import com.example.pokedex.features.home.HomeViewModel
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCase
@@ -43,6 +46,10 @@ val useCaseModule = module {
     factory<GetListPokemonUseCaseInterface> {
         GetListPokemonUseCase(get())
     }
+
+    factory<GetDetailPokemonUseCaseInterface> {
+        GetDetailPokemonUseCase(get())
+    }
 }
 
 val apiModule = module {
@@ -55,6 +62,14 @@ val viewModelHome = module {
     viewModel {
         HomeViewModel(
             get(),
+        )
+    }
+}
+
+val viewModelPokemonDetails = module {
+    viewModel{
+        PokemonDetailsViewModel(
+            get()
         )
     }
 }
