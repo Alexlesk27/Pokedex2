@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 class PokemonDetailsViewModel(
     private val pokemonUseCase: GetDetailPokemonUseCaseInterface
 ) : ViewModel() {
-    private var _pokemonDetail = MutableStateFlow<ListState<PokemonsResult>>(ListState.New)
-    val pokemonDetail: StateFlow<ListState<PokemonsResult>> = _pokemonDetail.asStateFlow()
+    private var _pokemonDetail = MutableStateFlow<ListState<PokemonResult>>(ListState.New)
+    val pokemonDetail: StateFlow<ListState<PokemonResult>> = _pokemonDetail.asStateFlow()
 
     fun getPokemon(name: String) {
         viewModelScope.launch {
@@ -24,7 +24,7 @@ class PokemonDetailsViewModel(
             }.collect {
                 when (it) {
                     is ResponseState.Success<*> -> {
-                        val pokemonResponse = it.value as PokemonsResult
+                        val pokemonResponse = it.value as PokemonResult
                         _pokemonDetail.value = ListState.Success(pokemonResponse)
                     }
                     is ResponseState.Error -> {

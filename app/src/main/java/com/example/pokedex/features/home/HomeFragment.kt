@@ -11,11 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.model.PokemonsResult
 import com.example.pokedex.support.setVisible
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

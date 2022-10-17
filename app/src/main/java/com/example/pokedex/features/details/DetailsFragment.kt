@@ -67,7 +67,7 @@ class DetailsFragment : Fragment() {
         binding.progressBarContainer.setVisible(state)
     }
 
-    private fun pokemonDetails(pokemonDetails: PokemonsResult) {
+    private fun pokemonDetails(pokemonDetails: PokemonResult) {
 
         Picasso.get().load(pokemonDetails.sprites.other.home.front_default).into(binding.imagePokemonDetails);
 
@@ -76,23 +76,23 @@ class DetailsFragment : Fragment() {
 
         binding.idPokemon.text = pokemonDetails.id.toString()
 
-        binding.hpValue.text = pokemonDetails.stats[0].base_stat.toString()
-        binding.progressBarHP.progress = pokemonDetails.stats[0].base_stat
+        binding.hpValue.text = pokemonDetails.stats[0].baseStat.toString()
+        binding.progressBarHP.progress = pokemonDetails.stats[0].baseStat
 
-        binding.attackValue.text = pokemonDetails.stats[1].base_stat.toString()
-        binding.progressBarAttack.progress = pokemonDetails.stats[1].base_stat
+        binding.attackValue.text = pokemonDetails.stats[1].baseStat.toString()
+        binding.progressBarAttack.progress = pokemonDetails.stats[1].baseStat
 
-        binding.defenseValue.text = pokemonDetails.stats[2].base_stat.toString()
-        binding.progressBarDefense.progress = pokemonDetails.stats[2].base_stat
+        binding.defenseValue.text = pokemonDetails.stats[2].baseStat.toString()
+        binding.progressBarDefense.progress = pokemonDetails.stats[2].baseStat
 
-        binding.spAttackValue.text = pokemonDetails.stats[3].base_stat.toString()
-        binding.progressBarspAttack.progress = pokemonDetails.stats[3].base_stat
+        binding.spAttackValue.text = pokemonDetails.stats[3].baseStat.toString()
+        binding.progressBarspAttack.progress = pokemonDetails.stats[3].baseStat
 
-        binding.spDefenseValue.text = pokemonDetails.stats[4].base_stat.toString()
-        binding.progressBarspDefense.progress = pokemonDetails.stats[4].base_stat
+        binding.spDefenseValue.text = pokemonDetails.stats[4].baseStat.toString()
+        binding.progressBarspDefense.progress = pokemonDetails.stats[4].baseStat
 
-        binding.speedValue.text = pokemonDetails.stats[5].base_stat.toString()
-        binding.progressBarSpeed.progress = pokemonDetails.stats[5].base_stat
+        binding.speedValue.text = pokemonDetails.stats[5].baseStat.toString()
+        binding.progressBarSpeed.progress = pokemonDetails.stats[5].baseStat
 
     }
 }

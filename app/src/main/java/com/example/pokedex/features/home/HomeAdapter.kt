@@ -1,7 +1,6 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,9 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.model.PokemonResponse
-import com.example.pokedex.model.PokemonsResult
-import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
