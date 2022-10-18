@@ -10,7 +10,7 @@ interface PokemonApi {
     suspend fun getPokemon(
     ):PokemonResponse
 
-    @GET("pokemon/{name}")
+    @GET("pokemo/{name}")
     suspend fun getDetails(
         @Path("name") name :String
     ):PokemonResult

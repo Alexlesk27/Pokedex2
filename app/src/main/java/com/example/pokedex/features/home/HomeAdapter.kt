@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
-    val onclick : (Pokemon) -> Unit
-) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()){
+    val onclick: (Pokemon) -> Unit
+) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -23,19 +23,18 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(getItem(position))
-
     }
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val name = binding.nameTextView
+        private val nameBinding = binding.nameTextView
 
         fun bind(pokemon: Pokemon) {
-            name.text = pokemon.name
+            nameBinding.text = pokemon.name
             binding.image.setOnClickListener {
                 onclick(pokemon)
             }
-       }
+        }
     }
 
     class HomeCallback : DiffUtil.ItemCallback<Pokemon>() {

@@ -18,26 +18,25 @@ class HomeViewModel(
     private var _pokemon = MutableStateFlow<ListState<List<Pokemon>>>(ListState.New)
     val pokemon: StateFlow<ListState<List<Pokemon>>> = _pokemon.asStateFlow()
 
-init {
-    getPokemon()
-}
-
-    private fun getPokemon() {
-       viewModelScope.launch {
-           listPokemon.execute().onStart {
-               _pokemon.value = ListState.Loading
-           }.collect{
-               when(it){
-                   is ResponseState.Success<*>->{
-                       val pokemonResponse = it.value as PokemonResponse
-                       _pokemon.value = ListState.Success(pokemonResponse.pokemon)
-                   }
-                   is ResponseState.Error->{
-                       _pokemon.value = ListState.Error(it.error.message)
-                   }
-               }
-           }
-       }
+    init {
+        getPokemon()
     }
 
+    private fun getPokemon() {
+        viewModelScope.launch {
+            listPokemon.execute().onStart {
+                _pokemon.value = ListState.Loading
+            }.collect {
+                when (it) {
+                    is ResponseState.Success<*> -> {
+                        val pokemonResponse = it.value as PokemonResponse
+                        _pokemon.value = ListState.Success(pokemonResponse.pokemon)
+                    }
+                    is ResponseState.Error -> {
+                        _pokemon.value = ListState.Error(it.error.message)
+                    }
+                }
+            }
+        }
+    }
 }

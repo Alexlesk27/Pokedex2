@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val detailsViewModel: PokemonDetailsViewModel by viewModel()
@@ -52,7 +51,6 @@ class DetailsFragment : Fragment() {
                         is ListState.Error -> {
                             showLoading(false)
                             showToast(it)
-
                         }
                         is ListState.Loading -> {
                             showLoading(true)
@@ -65,11 +63,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showToast(it: ListState.Error) {
-        Toast.makeText(
-            context,
-            it.error ?: R.string.pokemon_error_details.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(requireContext(), it.error ?: R.string.pokemon_error_details.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoading(state: Boolean) {
