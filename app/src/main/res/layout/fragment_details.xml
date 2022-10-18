@@ -15,13 +15,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="N : "
+            android:text="@string/id_pokemon_title"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
             app:layout_constraintStart_toStartOf="@id/image_pokemon_details"
-            tools:text="N :001"
+
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -30,11 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="4dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="@id/id_pokemon_title"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:text="001" />
 
         <ImageView
             android:id="@+id/image_pokemon_details"
@@ -52,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
-            android:text="Tipo :"
+            android:text="@string/type_title"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
@@ -68,10 +71,11 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.131"
             app:layout_constraintStart_toEndOf="@id/type_title"
             app:layout_constraintTop_toBottomOf="@id/name_pokemon"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:text="fire" />
 
         <TextView
             android:id="@+id/name_pokemon"
@@ -91,7 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Speed"
+            android:textStyle="bold"
+            android:text="@string/speed_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarspDefense" />
 
@@ -101,7 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="HP"
+            android:text="@string/hp_title"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/type_title" />
 
@@ -122,6 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/progressBarHP"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -131,7 +138,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Attack"
+            android:textStyle="bold"
+            android:text="@string/attack_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarHP" />
 
@@ -160,7 +168,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Defense"
+            android:textStyle="bold"
+            android:text="@string/defense_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarAttack" />
 
@@ -189,7 +198,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Special Attack"
+            android:textStyle="bold"
+            android:text="@string/especial_attack"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarDefense" />
 
@@ -218,7 +228,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Special Defense"
+            android:textStyle="bold"
+            android:text="@string/especial_defense"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarspAttack" />
 

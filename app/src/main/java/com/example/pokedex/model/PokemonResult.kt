@@ -1,11 +1,12 @@
 package com.example.pokedex.model
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class PokemonResult(
-    val id: Int,
-    val name: String,
-    val sprites: Sprites,
-    val stats: List<Stat>,
-    val types: List<Type>
+    @SerializedName("id") var id: Int,
+    @SerializedName("name") var name: String,
+    @SerializedName("sprites") var sprites: Sprites,
+    @SerializedName("stats") var stats: List<Stat>,
+    @SerializedName("types") var types: List<Type>
 ) : Serializable

@@ -23,9 +23,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image"
                 android:layout_centerHorizontal="true"
-                android:text="name pokemon"
-                android:textAlignment="center"
                 android:fontFamily="@font/silkscreenbold"
+                tools:text="name pokemon"
+                android:textAlignment="center"
                 android:textColor="#F44336"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,SpUsage" />

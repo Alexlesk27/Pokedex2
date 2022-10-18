@@ -28,7 +28,7 @@ class PokemonDetailsViewModel(
                         _pokemonDetail.value = ListState.Success(pokemonResponse)
                     }
                     is ResponseState.Error -> {
-                        _pokemonDetail.value = ListState.Error()
+                        _pokemonDetail.value = ListState.Error(it.error.message)
                     }
                 }
             }

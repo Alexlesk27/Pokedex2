@@ -1,9 +1,8 @@
 package com.example.pokedex.model
 
-data class Pokemon (
-    val number : Int,
-    val name : String,
-    val image: String,
-    val results: List<PokemonResult>
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-)
+data class Pokemon(
+    @SerializedName("name") val name: String,
+): Serializable

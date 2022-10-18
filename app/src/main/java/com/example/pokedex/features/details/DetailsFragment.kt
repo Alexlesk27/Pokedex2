@@ -1,6 +1,7 @@
 package com.example.pokedex.features.details
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentDetailsBinding
 import com.example.pokedex.model.*
 import com.example.pokedex.support.setVisible
@@ -38,7 +40,6 @@ class DetailsFragment : Fragment() {
 
     }
 
-
     private fun observePokemonDetails() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -48,19 +49,27 @@ class DetailsFragment : Fragment() {
                             showLoading(false)
                             pokemonDetails(it.value)
                         }
-                        is ListState.Error->{
+                        is ListState.Error -> {
                             showLoading(false)
-                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                            showToast(it)
+
                         }
-                        is ListState.Loading ->{
+                        is ListState.Loading -> {
                             showLoading(true)
                         }
-
-                        else -> {}
+                        else -> Unit
                     }
                 }
             }
         }
+    }
+
+    private fun showToast(it: ListState.Error) {
+        Toast.makeText(
+            context,
+            it.error ?: R.string.pokemon_error_details.toString(),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showLoading(state: Boolean) {
@@ -69,7 +78,8 @@ class DetailsFragment : Fragment() {
 
     private fun pokemonDetails(pokemonDetails: PokemonResult) {
 
-        Picasso.get().load(pokemonDetails.sprites.other.home.front_default).into(binding.imagePokemonDetails);
+        Picasso.get().load(pokemonDetails.sprites.other.home.frontDefault)
+            .into(binding.imagePokemonDetails)
 
         binding.namePokemon.text = pokemonDetails.name
         binding.type.text = pokemonDetails.types[0].type.name

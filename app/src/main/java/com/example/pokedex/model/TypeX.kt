@@ -1,6 +1,9 @@
 package com.example.pokedex.model
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 data class TypeX(
-    var name: String,
-    var url: String
-)
+    @SerializedName("name") var name: String,
+    @SerializedName("url") var url: String
+):Serializable

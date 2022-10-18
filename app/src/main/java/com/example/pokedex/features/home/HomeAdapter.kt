@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
+import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
@@ -22,6 +23,7 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
@@ -30,8 +32,7 @@ class HomeAdapter(
 
         fun bind(pokemon: Pokemon) {
             name.text = pokemon.name
-
-            binding.root.setOnClickListener {
+            binding.image.setOnClickListener {
                 onclick(pokemon)
             }
        }

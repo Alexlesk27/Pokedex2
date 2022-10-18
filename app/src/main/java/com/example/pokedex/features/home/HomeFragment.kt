@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun observerList() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.pokemon.collect() {
+                homeViewModel.pokemon.collect {
                     when (it) {
                         is ListState.Success -> {
                             homeAdapter.submitList(it.value)
@@ -49,14 +49,12 @@ class HomeFragment : Fragment() {
                         }
                         is ListState.Error -> {
                             showLoading(false)
-                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
                         }
                         is ListState.Loading -> {
                             showLoading(true)
                         }
-                        else -> {
-
-                        }
+                        else -> Unit
                     }
                 }
             }

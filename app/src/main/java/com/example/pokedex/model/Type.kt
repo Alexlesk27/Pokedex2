@@ -1,6 +1,8 @@
 package com.example.pokedex.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Type(
-    val slot: Int,
-    var type: TypeX
+    @SerializedName("slot") val slot: Int,
+    @SerializedName("type") var type: TypeX
 )
