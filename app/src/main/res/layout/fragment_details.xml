@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradiente">
+    android:background="@drawable/background_gradient">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,28 +16,28 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="@string/id_pokemon_title"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
-            app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
-            app:layout_constraintStart_toStartOf="@id/image_pokemon_details"
-
+            app:layout_constraintEnd_toStartOf="@+id/id_pokemon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/id_pokemon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginBottom="4dp"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
-            app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="@id/id_pokemon_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/id_pokemon_title"
             tools:ignore="MissingConstraints"
             tools:text="001" />
 
@@ -58,9 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
             android:text="@string/type_title"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
             app:layout_constraintHorizontal_bias="0.288"
             app:layout_constraintStart_toStartOf="@id/image_pokemon_details"
@@ -71,9 +71,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
             app:layout_constraintHorizontal_bias="0.131"
             app:layout_constraintStart_toEndOf="@id/type_title"
@@ -86,9 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
             app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="@id/image_pokemon_details"
@@ -101,8 +101,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/speed_title"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarspDefense" />
 
@@ -135,8 +135,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/progressBarHP"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -147,8 +147,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/attack_title"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarHP" />
 
@@ -179,8 +179,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/defense_title"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarAttack" />
 
@@ -211,8 +211,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/especial_attack"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarDefense" />
 
@@ -243,8 +243,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/especial_defense"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarspAttack" />
 
