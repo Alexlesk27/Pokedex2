@@ -75,6 +75,8 @@ class DetailsFragment : Fragment() {
         Picasso.get().load(pokemonDetails.sprites.other.home.frontDefault)
             .into(binding.imagePokemonDetails)
 
+        Log.i("image","${pokemonDetails.sprites.other.home.frontDefault}" )
+
         binding.namePokemon.text = pokemonDetails.name
         binding.type.text = pokemonDetails.types[0].type.name
 
