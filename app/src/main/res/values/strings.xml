@@ -7,12 +7,12 @@
 
     <!-- DetailsLayoutsStrigs   -->
     <string name="id_pokemon_title">Nº</string>
-    <string name="type_title">Type :</string>
-    <string name="speed_title">Speed</string>
+    <string name="type_title">Tipo :</string>
+    <string name="speed_title">Velocidade</string>
     <string name="hp_title">Hp</string>
-    <string name="attack_title">Attack</string>
-    <string name="defense_title">Defense</string>
-    <string name="especial_attack">Special Attack</string>
-    <string name="especial_defense">Special Defense</string>
+    <string name="attack_title">Ataque</string>
+    <string name="defense_title">Defesa</string>
+    <string name="especial_attack">Especial Ataque</string>
+    <string name="especial_defense">Especial Defesa</string>
 
 </resources>

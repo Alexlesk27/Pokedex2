@@ -20,7 +20,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
-            app:layout_constraintEnd_toStartOf="@+id/id_pokemon"
+            app:layout_constraintEnd_toStartOf="@id/id_pokemon"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toTopOf="@id/image_pokemon_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/id_pokemon_title"
+            app:layout_constraintStart_toEndOf="@id/id_pokemon_title"
             tools:ignore="MissingConstraints"
             tools:text="001" />
 
@@ -50,7 +50,8 @@
             app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_launcher_background" />
+            tools:srcCompat="@drawable/ic_launcher_background"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/type_title"
@@ -293,7 +294,6 @@
             android:id="@+id/progressBar_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateDrawable="@drawable/progress_bar"
             app:layout_constraintBottom_toBottomOf="@id/progressBarAttack"
             app:layout_constraintEnd_toEndOf="@id/image_pokemon_details"
             app:layout_constraintHorizontal_bias="0.46"

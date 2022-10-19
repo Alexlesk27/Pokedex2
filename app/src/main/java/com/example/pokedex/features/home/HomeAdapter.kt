@@ -27,10 +27,8 @@ class HomeAdapter(
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val nameBinding = binding.nameTextView
-
         fun bind(pokemon: Pokemon) {
-            nameBinding.text = pokemon.name
+            binding.nameTextView.text = pokemon.name
             binding.image.setOnClickListener {
                 onclick(pokemon)
             }

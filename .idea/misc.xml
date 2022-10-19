@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/drawable/toast_error.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/toolbar_backgroud_gradiente.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.13043478260869565" />
         <entry key="app/src/main/res/layout/item_pokemon.xml" value="0.1" />
