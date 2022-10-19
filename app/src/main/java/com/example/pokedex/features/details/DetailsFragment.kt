@@ -84,7 +84,7 @@ class DetailsFragment : Fragment() {
         binding.progressBarHP.progress = pokemonDetails.stats[0].baseStat
 
         binding.attackValue.text = pokemonDetails.stats[1].baseStat.toString()
-        binding.progressBarAttack.progress = pokemonDetails.stats[1].baseStat
+        binding.progressBarAttack.setProgress(pokemonDetails.stats[1].baseStat)
 
         binding.defenseValue.text = pokemonDetails.stats[2].baseStat.toString()
         binding.progressBarDefense.progress = pokemonDetails.stats[2].baseStat
