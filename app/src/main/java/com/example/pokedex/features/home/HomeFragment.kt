@@ -9,9 +9,11 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.ListState
+import com.example.pokedex.model.Pokemon
 import com.example.pokedex.support.setVisible
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun observerList() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.pokemon.collect() {
+                homeViewModel.pokemon.collect {
                     when (it) {
                         is ListState.Success -> {
                             homeAdapter.submitList(it.value)
@@ -47,14 +49,12 @@ class HomeFragment : Fragment() {
                         }
                         is ListState.Error -> {
                             showLoading(false)
-                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
                         }
                         is ListState.Loading -> {
                             showLoading(true)
                         }
-                        else -> {
-
-                        }
+                        else -> Unit
                     }
                 }
             }
@@ -67,11 +67,18 @@ class HomeFragment : Fragment() {
             activity,
             LinearLayoutManager.VERTICAL, false
         )
-        homeAdapter = HomeAdapter(requireContext())
+        homeAdapter = HomeAdapter(requireContext()){
+          goToDetailPokemon(it)
+        }
         recyclerView.adapter = homeAdapter
     }
 
     private fun showLoading(state: Boolean) {
         binding.progressBarContainer.setVisible(state)
+    }
+
+    private fun goToDetailPokemon(pokemon: Pokemon){
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(pokemon.name)
+        findNavController().navigate(action)
     }
 }

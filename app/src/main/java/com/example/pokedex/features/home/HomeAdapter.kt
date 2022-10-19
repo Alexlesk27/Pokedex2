@@ -1,17 +1,21 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.text.capitalize
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
+import com.squareup.picasso.Picasso
 
 class HomeAdapter(
-    private var context: Context
-) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()){
+    private var context: Context,
+    val onclick: (Pokemon) -> Unit
+) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -25,13 +29,12 @@ class HomeAdapter(
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val name = binding.nameTextView
-        private val image = binding.image
-
         fun bind(pokemon: Pokemon) {
-            name.text = pokemon.name
-
-       }
+            binding.nameTextView.text = pokemon.name
+            binding.image.setOnClickListener {
+                onclick(pokemon)
+            }
+        }
     }
 
     class HomeCallback : DiffUtil.ItemCallback<Pokemon>() {

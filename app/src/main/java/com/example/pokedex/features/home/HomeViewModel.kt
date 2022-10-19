@@ -2,6 +2,7 @@ package com.example.pokedex.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pokedex.ApiRest.repository.PokemonRepository
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
@@ -17,25 +18,25 @@ class HomeViewModel(
     private var _pokemon = MutableStateFlow<ListState<List<Pokemon>>>(ListState.New)
     val pokemon: StateFlow<ListState<List<Pokemon>>> = _pokemon.asStateFlow()
 
-init {
-    getPokemon()
-}
+    init {
+        getPokemon()
+    }
 
     private fun getPokemon() {
-       viewModelScope.launch {
-           listPokemon.execute().onStart {
-               _pokemon.value = ListState.Loading
-           }.collect{
-               when(it){
-                   is ResponseState.Success<*>->{
-                       val pokemonResponse = it.value as PokemonResponse
-                       _pokemon.value = ListState.Success(pokemonResponse.pokemon)
-                   }
-                   is ResponseState.Error->{
-                       _pokemon.value = ListState.Error()
-                   }
-               }
-           }
-       }
+        viewModelScope.launch {
+            listPokemon.execute().onStart {
+                _pokemon.value = ListState.Loading
+            }.collect {
+                when (it) {
+                    is ResponseState.Success<*> -> {
+                        val pokemonResponse = it.value as PokemonResponse
+                        _pokemon.value = ListState.Success(pokemonResponse.pokemon)
+                    }
+                    is ResponseState.Error -> {
+                        _pokemon.value = ListState.Error(it.error.message)
+                    }
+                }
+            }
+        }
     }
 }
