@@ -1,11 +1,8 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.text.capitalize
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +12,9 @@ import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
-    val onclick: (Pokemon) -> Unit
+    val onclick: (Pokemon) -> Unit,
 ) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
     lateinit var binding: ItemPokemonBinding
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -28,20 +24,16 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(getItem(position))
-
     }
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: Pokemon) {
-            var position: Int = position + 1
             Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${position}.png")
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${position + 1}.png")
                 .into(binding.image)
-
             binding.nameTextView.text = pokemon.name
-
-            binding.image.setOnClickListener {
+            binding.card.setOnClickListener {
                 onclick(pokemon)
             }
         }
