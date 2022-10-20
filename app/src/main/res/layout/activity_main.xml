@@ -10,6 +10,7 @@
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll"
         android:background="@drawable/background_gradient"
         android:elevation="4dp"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"

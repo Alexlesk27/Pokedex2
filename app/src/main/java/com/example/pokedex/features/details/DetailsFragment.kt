@@ -63,7 +63,11 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showToast(it: ListState.Error) {
-        Toast.makeText(requireContext(), it.error ?: R.string.pokemon_error_details.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            it.error ?: R.string.pokemon_error_details.toString(),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun showLoading(state: Boolean) {
