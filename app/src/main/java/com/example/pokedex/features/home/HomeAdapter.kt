@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 
 class HomeAdapter(
     private var context: Context,
-    val onclick: (Pokemon) -> Unit,
+    val onclick: (Pokemon) -> Unit
 ) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
     lateinit var binding: ItemPokemonBinding
 
@@ -30,7 +30,7 @@ class HomeAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: Pokemon) {
             Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${position + 1}.png")
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition +1}.png")
                 .into(binding.image)
             binding.nameTextView.text = pokemon.name
             binding.card.setOnClickListener {
