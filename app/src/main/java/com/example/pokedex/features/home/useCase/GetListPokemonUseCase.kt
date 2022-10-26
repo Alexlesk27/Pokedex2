@@ -8,18 +8,19 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 interface GetListPokemonUseCaseInterface {
-    suspend fun execute(): Flow<ResponseState>
+    suspend fun execute(page: Int): Flow<ResponseState>
 }
 
 class GetListPokemonUseCase(
+
     private val pokemonRepository: PokemonRepository
-):GetListPokemonUseCaseInterface  {
-    override suspend fun execute():Flow<ResponseState> {
+) : GetListPokemonUseCaseInterface {
+    override suspend fun execute(page: Int): Flow<ResponseState> {
         return flow {
             try {
-                val response = pokemonRepository.getListPokemon()
+                val response = pokemonRepository.getListPokemon(page)
                 emit(ResponseState.Success(response))
-            } catch (error : Exception){
+            } catch (error: Exception) {
                 emit(ResponseState.Error(error))
             }
         }.flowOn(Dispatchers.IO)

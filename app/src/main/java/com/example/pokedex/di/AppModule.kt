@@ -62,6 +62,7 @@ val viewModelHome = module {
     viewModel {
         HomeViewModel(
             get(),
+
         )
     }
 }
