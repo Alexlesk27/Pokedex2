@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.substring
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
+import java.lang.Character.toUpperCase
+import java.util.*
 
 class HomeAdapter(
     private var context: Context,
@@ -33,11 +36,12 @@ class HomeAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: Pokemon) {
             Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition}.png")
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition + 1}.png")
                 .into(binding.image)
 
-            binding.nameTextView.text = pokemon.name
-            binding.card.setOnClickListener {
+            binding.namePokemon.text =
+                pokemon.name.replaceFirstChar { it.uppercase() }
+            binding.cardView.setOnClickListener {
                 onclick(pokemon)
             }
         }

@@ -1,19 +1,13 @@
 package com.example.pokedex.features.home.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.pokedex.features.home.useCase.GetListPokemonUseCase
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
-import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
 import com.example.pokedex.model.PokemonResponse
 import com.example.pokedex.support.NETWORK_PAGE_SIZE
 import com.example.pokedex.support.ResponseState
 import com.example.pokedex.support.STARTING_PAGE
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class PokemoPegingSource(
     val pokemonRepository: GetListPokemonUseCaseInterface
@@ -28,12 +22,10 @@ class PokemoPegingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
-            val page = params.key ?: 0
-            Log.i("page", "$page")
+            val page = params.key ?: STARTING_PAGE
             var response: PokemonResponse? = null
 
             pokemonRepository.execute(page = page).collect {
-                Log.i("params", "${params.loadSize}")
                 when (it) {
                     is ResponseState.Success<*> -> {
                         response = it.value as PokemonResponse

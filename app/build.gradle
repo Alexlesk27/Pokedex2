@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.pokedex"
         minSdk 21
-        targetSdk 30
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -111,5 +111,8 @@ dependencies {
 
     //Pagging
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    //pull-to-refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 }

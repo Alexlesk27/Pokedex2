@@ -9,11 +9,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
-import com.example.pokedex.features.home.paging.ReposLoadStateAdapter
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.support.setVisible
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,27 +27,30 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
         collectResults()
-
     }
 
     private fun initRecyclerview() {
-        binding.pokemonListRecyclerView.layoutManager = LinearLayoutManager(
+        binding.pokemonListRecyclerView.layoutManager = GridLayoutManager(
             activity,
-            LinearLayoutManager.VERTICAL, false
+            2
         )
         homeAdapter = HomeAdapter(requireContext()) {
             goToDetailPokemon(it)
         }
         binding.pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
-            footer = SampleLoadStateAdapter { homeAdapter.retry() }
+            footer = SampleLoadStateAdapter{ homeAdapter.retry() },
         )
+        homeAdapter.addLoadStateListener { loadState ->
+            binding.pokemonListRecyclerView.isVisible =loadState.source.refresh is LoadState.NotLoading
+            binding.buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        }
     }
 
     private fun collectResults() {

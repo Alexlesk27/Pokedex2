@@ -2,36 +2,35 @@ package com.example.pokedex.features.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
-import com.example.pokedex.databinding.FragmentEmptyBinding
+import com.example.pokedex.databinding.FragmentLoadStateBinding
 
 class LoadStateViewHolder(
-    parent: ViewGroup,
-    retry: () -> Unit) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context)
-    .inflate(R.layout.fragment_empty, parent, false)
-) {
-    private val binding = FragmentEmptyBinding.bind(itemView)
-    private val progressBar: ProgressBar = binding.progressBar
-    private val errorMsg: TextView = binding.errorMsg
-    private val retry: Button = binding.retryButton
-        .also {
-            it.setOnClickListener { retry() }
-        }
+    private val binding: FragmentLoadStateBinding,
+    retry: () -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        binding.buttonRetry.setOnClickListener { retry.invoke() }
+    }
 
     fun bind(loadState: LoadState) {
         if (loadState is LoadState.Error) {
-            errorMsg.text = loadState.error.localizedMessage
+            binding.errorMsg.text = loadState.error.localizedMessage
         }
+        binding.progressBar.isVisible = loadState is LoadState.Loading
+        binding.buttonRetry.isVisible = loadState is LoadState.Error
+    }
 
-        progressBar.isVisible = loadState is LoadState.Loading
-        retry.isVisible = loadState is LoadState.Error
-        errorMsg.isVisible = loadState is LoadState.Error
+    companion object {
+        fun create(parent: ViewGroup, retry: () -> Unit): LoadStateViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.fragment_load_state, parent, false)
+            val binding = FragmentLoadStateBinding.bind(view)
+            return LoadStateViewHolder(binding, retry)
+        }
     }
 }

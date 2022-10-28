@@ -12,7 +12,6 @@ import com.example.pokedex.model.Pokemon
 import com.example.pokedex.support.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.*
 
-
 class HomeViewModel(
     private val listPokemon: GetListPokemonUseCaseInterface,
 ) : ViewModel() {
