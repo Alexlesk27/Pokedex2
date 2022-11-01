@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -44,11 +45,12 @@ class HomeFragment : Fragment() {
             goToDetailPokemon(it)
         }
         binding.pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
-            footer = SampleLoadStateAdapter{ homeAdapter.retry() },
+            footer = SampleLoadStateAdapter { homeAdapter.retry() },
         )
         homeAdapter.addLoadStateListener { loadState ->
-            binding.pokemonListRecyclerView.isVisible =loadState.source.refresh is LoadState.NotLoading
-            binding.buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+            binding.errorMsg.isVisible = loadState.source.refresh is LoadState.Error
+            binding.pokemonListRecyclerView.isVisible =
+                loadState.source.refresh is LoadState.NotLoading
             binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
         }
     }

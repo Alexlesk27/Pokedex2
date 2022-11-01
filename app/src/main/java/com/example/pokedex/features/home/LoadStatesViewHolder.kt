@@ -23,6 +23,7 @@ class LoadStateViewHolder(
         }
         binding.progressBar.isVisible = loadState is LoadState.Loading
         binding.buttonRetry.isVisible = loadState is LoadState.Error
+        binding.errorMsg.isVisible = loadState is LoadState.Error
     }
 
     companion object {

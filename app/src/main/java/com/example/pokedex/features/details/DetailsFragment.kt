@@ -1,7 +1,6 @@
 package com.example.pokedex.features.details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -75,20 +74,19 @@ class DetailsFragment : Fragment() {
     }
 
     private fun pokemonDetails(pokemonDetails: PokemonResult) {
+        binding.idPokemon.text = pokemonDetails.id.toString()
 
         Picasso.get().load(pokemonDetails.sprites.other.home.frontDefault)
             .into(binding.imagePokemonDetails)
 
-        binding.namePokemon.text = pokemonDetails.name
-        binding.type.text = pokemonDetails.types[0].type.name
-
-        binding.idPokemon.text = pokemonDetails.id.toString()
+        binding.namePokemon.text = pokemonDetails.name.replaceFirstChar {it.uppercase() }
+        binding.type.text = pokemonDetails.types[0].type.name.replaceFirstChar { it.uppercase() }
 
         binding.hpValue.text = pokemonDetails.stats[0].baseStat.toString()
         binding.progressBarHP.progress = pokemonDetails.stats[0].baseStat
 
         binding.attackValue.text = pokemonDetails.stats[1].baseStat.toString()
-        binding.progressBarAttack.setProgress(pokemonDetails.stats[1].baseStat)
+        binding.progressBarAttack.progress= pokemonDetails.stats[1].baseStat
 
         binding.defenseValue.text = pokemonDetails.stats[2].baseStat.toString()
         binding.progressBarDefense.progress = pokemonDetails.stats[2].baseStat

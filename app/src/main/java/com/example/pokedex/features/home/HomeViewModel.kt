@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.pokedex.features.home.paging.PokemoPegingSource
+import com.example.pokedex.features.home.paging.PokemonPagingSource
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
 import com.example.pokedex.model.Pokemon
 import com.example.pokedex.support.NETWORK_PAGE_SIZE
@@ -24,7 +24,7 @@ class HomeViewModel(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                PokemoPegingSource(pokemonRepository = listPokemon)
+                PokemonPagingSource(pokemonRepository = listPokemon)
             }
         ).flow.cachedIn(viewModelScope)
     }

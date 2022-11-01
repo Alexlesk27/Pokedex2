@@ -17,5 +17,4 @@ interface PokemonApi {
     suspend fun getDetails(
         @Path("name") name: String
     ): PokemonResult
-
 }
