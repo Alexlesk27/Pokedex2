@@ -39,11 +39,11 @@ class PokemonPagingSource(
             val nextKey = if (response?.pokemon.isNullOrEmpty()) null
             else page.plus(NETWORK_PAGE_SIZE)
             LoadResult.Page(
-                data = response?.pokemon ?: emptyList(),
+                data = response?.pokemon?: emptyList(),
                 prevKey = if (page == 0) null else page.minus(20),
                 nextKey = nextKey,
             )
-        } catch (error: Throwable) {
+        } catch (error: Exception) {
             LoadResult.Error(error)
         }
     }

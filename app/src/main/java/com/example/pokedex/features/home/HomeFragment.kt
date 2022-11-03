@@ -36,22 +36,21 @@ class HomeFragment : Fragment() {
         collectResults()
     }
 
-    private fun initRecyclerview() {
-        binding.pokemonListRecyclerView.layoutManager = GridLayoutManager(
+    private fun initRecyclerview() = with(binding) {
+        pokemonListRecyclerView.layoutManager = GridLayoutManager(
             activity,
             2
         )
         homeAdapter = HomeAdapter(requireContext()) {
             goToDetailPokemon(it)
         }
-        binding.pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
-            footer = SampleLoadStateAdapter { homeAdapter.retry() },
+        pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
+            footer = SampleLoadStateAdapter { homeAdapter.retry() }
         )
         homeAdapter.addLoadStateListener { loadState ->
-            binding.errorMsg.isVisible = loadState.source.refresh is LoadState.Error
-            binding.pokemonListRecyclerView.isVisible =
-                loadState.source.refresh is LoadState.NotLoading
-            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            errorMsg.isVisible = loadState.source.refresh is LoadState.Error
+            pokemonListRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            progressBar.isVisible = loadState.source.refresh is LoadState.Loading
         }
     }
 
