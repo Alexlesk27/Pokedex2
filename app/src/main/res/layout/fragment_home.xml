@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     tools:context=".features.home.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_list_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_pokemon" />
 
     <ProgressBar
-        android:id="@+id/progressBar_container"
-        android:layout_width="wrap_content"
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="179dp"
-        android:layout_marginTop="297dp"
-        android:layout_marginEnd="184dp"
-        android:layout_marginBottom="-345dp"
-        android:indeterminateDrawable="@drawable/progress_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="633dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pokemon_list_recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnknownId" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954"
+        tools:ignore="MissingConstraints"
+        android:indeterminateDrawable="@drawable/progress_bar"/>
 
+    <TextView
+        android:id="@+id/error_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531"
+        tools:text="sem conexão com a internet"
+        tools:visibility="visible" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

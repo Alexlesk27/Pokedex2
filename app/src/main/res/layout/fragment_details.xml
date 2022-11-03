@@ -299,6 +299,7 @@
             app:layout_constraintHorizontal_bias="0.46"
             app:layout_constraintStart_toStartOf="@id/image_pokemon_details"
             app:layout_constraintTop_toBottomOf="@id/image_pokemon_details"
+            android:indeterminateDrawable="@drawable/progress_bar"
             app:layout_constraintVertical_bias="0.565"
             tools:ignore="MissingConstraints,UnknownId" />
 

@@ -1,39 +1,47 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.substring
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
+import java.lang.Character.toUpperCase
+import java.util.*
 
 class HomeAdapter(
     private var context: Context,
     val onclick: (Pokemon) -> Unit
-) : ListAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
-    lateinit var binding: ItemPokemonBinding
+) : PagingDataAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        binding = ItemPokemonBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemPokemonBinding.inflate(layoutInflater, parent, false)
         return HomeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: Pokemon) {
             Picasso.get()
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition +1}.png")
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition + 1}.png")
                 .into(binding.image)
-            binding.nameTextView.text = pokemon.name
-            binding.card.setOnClickListener {
+
+            binding.namePokemon.text =
+                pokemon.name.replaceFirstChar { it.uppercase() }
+            binding.cardView.setOnClickListener {
                 onclick(pokemon)
             }
         }
@@ -47,7 +55,7 @@ class HomeAdapter(
         }
 
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem == newItem
         }
     }
 }

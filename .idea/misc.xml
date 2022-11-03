@@ -13,14 +13,17 @@
         <entry key="app/src/main/res/drawable/home_background_gradiente.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/ic_not_found.xml" value="0.111" />
         <entry key="app/src/main/res/drawable/ic_up.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/toast_error.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/toolbar_backgroud_gradiente.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_empty.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_error.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.13043478260869565" />
-        <entry key="app/src/main/res/layout/item_pokemon.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_pokemon.xml" value="0.25" />
         <entry key="app/src/main/res/layout/toast.xml" value="0.165" />
       </map>
     </option>

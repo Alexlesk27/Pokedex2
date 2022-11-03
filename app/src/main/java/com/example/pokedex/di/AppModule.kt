@@ -61,7 +61,7 @@ val apiModule = module {
 val viewModelHome = module {
     viewModel {
         HomeViewModel(
-            get(),
+            get()
         )
     }
 }

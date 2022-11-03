@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Lifecycle
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
-import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
-import com.example.pokedex.support.setVisible
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,55 +28,41 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
-        observerList()
+        collectResults()
     }
 
-    private fun observerList() {
+    private fun initRecyclerview() = with(binding) {
+        pokemonListRecyclerView.layoutManager = GridLayoutManager(
+            activity,
+            2
+        )
+        homeAdapter = HomeAdapter(requireContext()) {
+            goToDetailPokemon(it)
+        }
+        pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
+            footer = SampleLoadStateAdapter { homeAdapter.retry() }
+        )
+        homeAdapter.addLoadStateListener { loadState ->
+            errorMsg.isVisible = loadState.source.refresh is LoadState.Error
+            pokemonListRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        }
+    }
+
+    private fun collectResults() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.pokemon.collect {
-                    when (it) {
-                        is ListState.Success -> {
-                            homeAdapter.submitList(it.value)
-                            showLoading(false)
-                        }
-                        is ListState.Error -> {
-                            showLoading(false)
-                            Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
-                        }
-                        is ListState.Loading -> {
-                            showLoading(true)
-                        }
-                        else -> Unit
-                    }
-                }
+            homeViewModel.getPokemon().collectLatest {
+                homeAdapter.submitData(it)
             }
         }
     }
 
-    private fun initRecyclerview() {
-        val recyclerView = binding.pokemonListRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
-        homeAdapter = HomeAdapter(requireContext()){
-          goToDetailPokemon(it)
-        }
-        recyclerView.adapter = homeAdapter
-    }
-
-    private fun showLoading(state: Boolean) {
-        binding.progressBarContainer.setVisible(state)
-    }
-
-    private fun goToDetailPokemon(pokemon: Pokemon){
+    private fun goToDetailPokemon(pokemon: Pokemon) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(pokemon.name)
         findNavController().navigate(action)
     }
