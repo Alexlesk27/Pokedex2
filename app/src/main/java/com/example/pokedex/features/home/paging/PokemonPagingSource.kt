@@ -16,7 +16,7 @@ class PokemonPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Pokemon>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(20)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(20)
         }
     }
 
