@@ -8,21 +8,31 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.pokedex.features.home.HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home"
+        android:label="Início">
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"/>
+            app:popEnterAnim="@anim/slide_in_left"
+            app:restoreState="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToSaveState="true"/>
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.pokedex.features.details.DetailsFragment"
-        tools:layout="@layout/fragment_details" >
+        tools:layout="@layout/fragment_details"
+        android:label="Detalhes">
         <argument
             android:name="pokemon"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/searchPokemonFragment"
+        android:name="com.example.pokedex.features.search.SearchPokemonFragment"
+        tools:layout="@layout/fragment_search_pokemons"
+        android:label="Pesquisa"/>
 
 </navigation>

@@ -1,21 +1,14 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.substring
-import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
-import java.lang.Character.toUpperCase
-import java.util.*
 
 class HomeAdapter(
     private var context: Context,
@@ -39,8 +32,8 @@ class HomeAdapter(
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition + 1}.png")
                 .into(binding.image)
 
-            binding.namePokemon.text =
-                pokemon.name.replaceFirstChar { it.uppercase() }
+            binding.namePokemon.text = pokemon.name.replaceFirstChar { it.uppercase() }
+
             binding.cardView.setOnClickListener {
                 onclick(pokemon)
             }
