@@ -35,8 +35,8 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         detailsViewModel.getPokemon(args.pokemon)
         observePokemonDetails()
-
     }
+
 
     private fun observePokemonDetails() {
         viewLifecycleOwner.lifecycleScope.launch {

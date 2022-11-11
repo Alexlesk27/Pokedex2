@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentHomeBinding
+import com.example.pokedex.features.details.DetailsFragment
 import com.example.pokedex.model.Pokemon
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,7 +67,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToDetailPokemon(pokemon: Pokemon) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(pokemon.name)
-        findNavController().navigate(action)
+        val bundle = bundleOf("pokemon" to pokemon.name)
+            findNavController().navigate(R.id.detailsFragment, bundle)
+            findNavController().saveState()
     }
 }

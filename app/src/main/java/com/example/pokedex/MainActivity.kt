@@ -3,6 +3,7 @@ package com.example.pokedex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -19,9 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setUpBottomNavigation()
         setupToolbar()
-
+        setUpBottomNavigation()
     }
 
     private fun setupToolbar() {
@@ -31,10 +31,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -42,10 +38,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigation() {
-        val navHostFragmentBottomNav =
-            supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
-        val navControllerBottomNav = navHostFragmentBottomNav.navController
-        binding.bottomNavigation.setupWithNavController(navControllerBottomNav)
-
+        val bottomNavigationView = binding.bottomNavigation
+        bottomNavigationView.setOnItemSelectedListener {item->
+             when(item.itemId){
+                 R.id.homeFragment->{
+                     findNavController(R.id.fragmentContainerView)
+                         .navigate(R.id.homeFragment)
+                 }
+                 R.id.searchPokemonFragment->{
+                     findNavController(R.id.fragmentContainerView)
+                         .navigate(R.id.searchPokemonFragment)
+                 }
+             }
+            return@setOnItemSelectedListener true
+        }
     }
 }
