@@ -5,10 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.example.pokedex.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,16 +19,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupToolbar()
         setUpBottomNavigation()
-    }
+        }
 
     private fun setupToolbar() {
         setSupportActionBar(binding.appToolbar)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -39,17 +36,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpBottomNavigation() {
         val bottomNavigationView = binding.bottomNavigation
-        bottomNavigationView.setOnItemSelectedListener {item->
-             when(item.itemId){
-                 R.id.homeFragment->{
-                     findNavController(R.id.fragmentContainerView)
-                         .navigate(R.id.homeFragment)
-                 }
-                 R.id.searchPokemonFragment->{
-                     findNavController(R.id.fragmentContainerView)
-                         .navigate(R.id.searchPokemonFragment)
-                 }
-             }
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment ->
+                    findNavController(R.id.fragmentContainerView)
+                        .navigate(R.id.homeFragment)
+
+                R.id.searchPokemonFragment ->
+                    findNavController(R.id.fragmentContainerView)
+                        .navigate(R.id.searchPokemonFragment)
+
+            }
             return@setOnItemSelectedListener true
         }
     }

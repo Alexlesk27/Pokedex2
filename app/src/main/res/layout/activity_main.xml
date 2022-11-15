@@ -13,6 +13,7 @@
         android:background="@drawable/background_gradient"
         app:titleTextColor="@color/white"
         android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_back"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
