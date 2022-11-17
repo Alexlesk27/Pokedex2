@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     private fun setUpBottomNavigation() {
         val bottomNavigationView = binding.bottomNavigation
         bottomNavigationView.setOnItemSelectedListener { item ->
-                    findNavController(R.id.fragmentContainerView)
-                        .navigate(item.itemId)
+            findNavController(R.id.fragmentContainerView)
+                .navigate(item.itemId)
             return@setOnItemSelectedListener true
         }
     }
