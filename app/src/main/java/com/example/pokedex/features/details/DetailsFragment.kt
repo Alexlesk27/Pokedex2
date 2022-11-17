@@ -37,7 +37,6 @@ class DetailsFragment : Fragment() {
         observePokemonDetails()
     }
 
-
     private fun observePokemonDetails() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -73,20 +72,20 @@ class DetailsFragment : Fragment() {
         binding.progressBarContainer.setVisible(state)
     }
 
-    private fun pokemonDetails(pokemonDetails: PokemonResult)= with(binding) {
+    private fun pokemonDetails(pokemonDetails: PokemonResult) = with(binding) {
         idPokemon.text = pokemonDetails.id.toString()
 
         Picasso.get().load(pokemonDetails.sprites.other.home.frontDefault)
             .into(imagePokemonDetails)
 
-        namePokemon.text = pokemonDetails.name.replaceFirstChar {it.uppercase()}
-        type.text = pokemonDetails.types[0].type.name.replaceFirstChar {it.uppercase()}
+        namePokemon.text = pokemonDetails.name.replaceFirstChar { it.uppercase() }
+        type.text = pokemonDetails.types[0].type.name.replaceFirstChar { it.uppercase() }
 
         hpValue.text = pokemonDetails.stats[0].baseStat.toString()
         progressBarHP.progress = pokemonDetails.stats[0].baseStat
 
         attackValue.text = pokemonDetails.stats[1].baseStat.toString()
-        binding.progressBarAttack.progress= pokemonDetails.stats[1].baseStat
+        binding.progressBarAttack.progress = pokemonDetails.stats[1].baseStat
 
         defenseValue.text = pokemonDetails.stats[2].baseStat.toString()
         progressBarDefense.progress = pokemonDetails.stats[2].baseStat

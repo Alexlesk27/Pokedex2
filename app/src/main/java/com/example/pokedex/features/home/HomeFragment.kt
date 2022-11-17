@@ -63,6 +63,6 @@ class HomeFragment : Fragment() {
 
     private fun goToDetailPokemon(pokemon: Pokemon) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(pokemon.name)
-            findNavController().navigate(action)
+        findNavController().navigate(action)
     }
 }

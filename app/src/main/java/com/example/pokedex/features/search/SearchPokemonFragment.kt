@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import com.example.pokedex.databinding.FragmentSearchPokemonsBinding
 
 class SearchPokemonFragment : Fragment() {
-  private lateinit var binding: FragmentSearchPokemonsBinding
+    private lateinit var binding: FragmentSearchPokemonsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       binding = FragmentSearchPokemonsBinding.inflate(inflater, container, false)
+        binding = FragmentSearchPokemonsBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
