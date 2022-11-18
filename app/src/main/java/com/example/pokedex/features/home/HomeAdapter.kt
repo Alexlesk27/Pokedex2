@@ -1,6 +1,7 @@
 package com.example.pokedex.features.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -28,6 +29,8 @@ class HomeAdapter(
     inner class HomeViewHolder(private val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemon: Pokemon) {
+            val listaDePokemon = arrayListOf(pokemon)
+            Log.i("pokemonAdapter", "$listaDePokemon")
             Picasso.get()
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${absoluteAdapterPosition + 1}.png")
                 .into(binding.image)
