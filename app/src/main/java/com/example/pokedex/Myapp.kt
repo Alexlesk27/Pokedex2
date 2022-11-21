@@ -22,7 +22,8 @@ class Myapp: Application() {
                 apiModule,
                 useCaseModule,
                 repositoryModule,
-                viewModelPokemonDetails
+                viewModelPokemonDetails,
+                viewModelSearchUse
             )
         }
     }

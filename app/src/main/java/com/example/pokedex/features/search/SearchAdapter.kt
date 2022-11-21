@@ -1,6 +1,7 @@
 package com.example.pokedex.features.search
 
 import android.icu.text.Transliterator.Position
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -12,7 +13,7 @@ import com.example.pokedex.databinding.ItemSearchBinding
 import com.example.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
 
-class SearchAdapter() : PagingDataAdapter<Pokemon, SearchAdapter.SearchViewHolder>(SearchCallback()) {
+class SearchAdapter() : ListAdapter<Pokemon, SearchAdapter.SearchViewHolder>(SearchCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -26,9 +27,20 @@ class SearchAdapter() : PagingDataAdapter<Pokemon, SearchAdapter.SearchViewHolde
 
     inner class SearchViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(pokemon: Pokemon){
-                 binding.title.text = pokemon.name.replaceFirstChar { it.uppercase() }
-            }
+
+        fun bind(pokemon: Pokemon) {
+            val url = pokemon.url
+                .replace("https://pokeapi.co/api/v2/pokemon/", "")
+                .replace("/", "")
+
+            Picasso.get().load(
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
+                        "/sprites/pokemon/other/home/${url}.png"
+            )
+                .into(binding.thumbnail)
+
+            binding.title.text = pokemon.name.replaceFirstChar { it.uppercase() }
+        }
     }
 
     class SearchCallback : DiffUtil.ItemCallback<Pokemon>() {

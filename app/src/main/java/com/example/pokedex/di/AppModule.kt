@@ -1,5 +1,6 @@
 package com.example.pokedex.di
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pokedex.ApiRest.PokemonApi
 import com.example.pokedex.ApiRest.repository.PokemonRepository
 import com.example.pokedex.features.details.PokemonDetailsViewModel
@@ -9,11 +10,15 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import com.example.pokedex.features.home.HomeViewModel
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCase
 import com.example.pokedex.features.home.useCase.GetListPokemonUseCaseInterface
+import com.example.pokedex.features.search.SearchPokemonViewModel
+import com.example.pokedex.features.search.useCase.GetListPokemonSearchInterface
+import com.example.pokedex.features.search.useCase.GetListPokemonSearchUseCase
 import com.example.pokedex.support.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.compose.get
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -50,6 +55,10 @@ val useCaseModule = module {
     factory<GetDetailPokemonUseCaseInterface> {
         GetDetailPokemonUseCase(get())
     }
+
+    factory<GetListPokemonSearchInterface> {
+        GetListPokemonSearchUseCase(get())
+    }
 }
 
 val apiModule = module {
@@ -77,5 +86,13 @@ val viewModelPokemonDetails = module {
 val repositoryModule = module {
     single{
         PokemonRepository(get())
+    }
+}
+
+val viewModelSearchUse = module {
+    viewModel{
+        SearchPokemonViewModel(
+            get()
+        )
     }
 }

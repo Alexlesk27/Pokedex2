@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.databinding.FragmentSearchPokemonsBinding
-import com.example.pokedex.features.home.HomeViewModel
-import com.example.pokedex.model.Pokemon
-import com.example.pokedex.support.removeDotAndDash
-import kotlinx.coroutines.flow.collectLatest
+import com.example.pokedex.model.ListState
 import kotlinx.coroutines.launch
 import okhttp3.internal.notify
 import okhttp3.internal.notifyAll
@@ -26,7 +25,7 @@ import retrofit2.http.Query
 class SearchPokemonFragment : Fragment() {
     private lateinit var binding: FragmentSearchPokemonsBinding
     private lateinit var searchAdapter: SearchAdapter
-    private val homeViewModel: HomeViewModel by viewModel()
+    private val searchViewModel: SearchPokemonViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,40 +51,34 @@ class SearchPokemonFragment : Fragment() {
         recyclerSearch.adapter = searchAdapter
     }
 
-    private fun collectResults(query: String) {
+    private fun observePokemonSearch(query: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.getPokemon().collectLatest {
-                val listFilter = it.filter {
-                    it.name.contains(query)
+            searchViewModel.pokemonSearch.collect {
+                when (it) {
+                    is ListState.Success -> {
+                        val listFilter = it.value.pokemon.filter {
+                            it.name.contains(query)
+                        }
+                        searchAdapter.submitList(listFilter)
+                    }
+                    else -> {}
                 }
-                searchAdapter.submitData(listFilter)
             }
         }
     }
 
+
     private fun initSearchView() {
         binding.searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isNotEmpty()) {
-                    binding.recyclerSearch.isVisible = true
-                    collectResults(query.trim())
-                }
-
+                observePokemonSearch(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.isNotEmpty()) {
-                    binding.recyclerSearch.isVisible = true
-                    binding.textInfo.isVisible = false
-                    collectResults(newText)
-                }
+                observePokemonSearch(newText)
                 return true
             }
-
         })
-
     }
-
-
 }
