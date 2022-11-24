@@ -32,6 +32,10 @@
         android:id="@+id/searchPokemonFragment"
         android:name="com.example.pokedex.features.search.SearchPokemonFragment"
         tools:layout="@layout/fragment_search_pokemons"
-        android:label="Pesquisa"/>
+        android:label="Pesquisa">
+        <action
+            android:id="@+id/action_searchPokemonFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 
 </navigation>

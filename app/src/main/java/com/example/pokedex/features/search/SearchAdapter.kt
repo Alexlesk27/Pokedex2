@@ -4,6 +4,7 @@ import android.icu.text.Transliterator.Position
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.ui.unit.dp
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,9 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.databinding.ItemPokemonBinding
 import com.example.pokedex.databinding.ItemSearchBinding
 import com.example.pokedex.model.Pokemon
+import com.example.pokedex.support.IMAGE_EXTENSION
+import com.example.pokedex.support.IMAGE_URL
+import com.example.pokedex.support.POKEMON_URL_REPLACE
 import com.squareup.picasso.Picasso
 
 class SearchAdapter() : ListAdapter<Pokemon, SearchAdapter.SearchViewHolder>(SearchCallback()) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -25,17 +30,15 @@ class SearchAdapter() : ListAdapter<Pokemon, SearchAdapter.SearchViewHolder>(Sea
         getItem(position)?.let { holder.bind(it) }
     }
 
-    inner class SearchViewHolder(private val binding: ItemSearchBinding) :
+  class SearchViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(pokemon: Pokemon) {
             val url = pokemon.url
-                .replace("https://pokeapi.co/api/v2/pokemon/", "")
+                .replace(POKEMON_URL_REPLACE, "")
                 .replace("/", "")
-
             Picasso.get().load(
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
-                        "/sprites/pokemon/other/home/${url}.png"
+                "${IMAGE_URL + url + IMAGE_EXTENSION}"
             )
                 .into(binding.thumbnail)
 
@@ -47,6 +50,7 @@ class SearchAdapter() : ListAdapter<Pokemon, SearchAdapter.SearchViewHolder>(Sea
         override fun areItemsTheSame(
             oldItem: Pokemon, newItem: Pokemon
         ): Boolean {
+
             return oldItem.name == newItem.name
         }
 

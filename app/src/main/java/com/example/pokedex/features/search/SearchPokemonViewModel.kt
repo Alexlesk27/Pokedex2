@@ -8,6 +8,7 @@ import com.example.pokedex.model.PokemonResponse
 import com.example.pokedex.support.ResponseState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import retrofit2.http.Query
 
 class SearchPokemonViewModel(
     private val pokemonUseCase: GetListPokemonSearchInterface
@@ -15,11 +16,11 @@ class SearchPokemonViewModel(
 
     private var _pokemonSearch = MutableStateFlow<ListState<PokemonResponse>>(ListState.New)
     val pokemonSearch: StateFlow<ListState<PokemonResponse>> = _pokemonSearch.asStateFlow()
+init {
+    getPokemon()
+}
 
-    init {
-        getPokemon()
-    }
-    private fun getPokemon(){
+  private  fun getPokemon(){
         viewModelScope.launch {
             pokemonUseCase.execute().onStart {
                 _pokemonSearch.value = ListState.Loading
@@ -36,4 +37,6 @@ class SearchPokemonViewModel(
             }
         }
     }
+
+
 }

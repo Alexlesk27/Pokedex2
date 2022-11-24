@@ -110,4 +110,7 @@ dependencies {
 
     //Paging
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.0.0"
+
 }

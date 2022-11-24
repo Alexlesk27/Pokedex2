@@ -12,7 +12,7 @@ interface PokemonApi {
         @Query("offset") page: Int
     ): PokemonResponse
 
-    @GET("pokemon/?limit=800&offset=0")
+    @GET("pokemon/?limit=890&offset=0")
     suspend fun getListPokemon(
     ): PokemonResponse
 

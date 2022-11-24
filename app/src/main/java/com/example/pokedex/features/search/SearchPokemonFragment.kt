@@ -1,6 +1,7 @@
 package com.example.pokedex.features.search
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,13 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.paging.PagingData
-import androidx.paging.PagingDataAdapter
-import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.databinding.FragmentSearchPokemonsBinding
 import com.example.pokedex.model.ListState
+import com.example.pokedex.model.Pokemon
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
+import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.http.Query
 
 class SearchPokemonFragment : Fragment() {
     private lateinit var binding: FragmentSearchPokemonsBinding
@@ -33,14 +30,12 @@ class SearchPokemonFragment : Fragment() {
     ): View {
         binding = FragmentSearchPokemonsBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
-        initSearchView()
+        observePokemonSearchFilter()
     }
 
     private fun initRecyclerview() = with(binding) {
@@ -51,34 +46,49 @@ class SearchPokemonFragment : Fragment() {
         recyclerSearch.adapter = searchAdapter
     }
 
-    private fun observePokemonSearch(query: String) {
+    private fun observePokemonSearchFilter() {
         viewLifecycleOwner.lifecycleScope.launch {
-            searchViewModel.pokemonSearch.collect {
-                when (it) {
-                    is ListState.Success -> {
-                        val listFilter = it.value.pokemon.filter {
-                            it.name.contains(query)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                searchViewModel.pokemonSearch.collect {
+                    when (it) {
+                        is ListState.Success -> {
+                            initSearchView(it.value.pokemon)
+                            searchAdapter.submitList(it.value.pokemon)
+                            binding.progressBarContainer.isVisible = false
                         }
-                        searchAdapter.submitList(listFilter)
+
+                        is ListState.Loading -> {
+                            binding.progressBarContainer.isVisible = true
+                        }
+                        else -> Unit
                     }
-                    else -> {}
                 }
             }
         }
     }
 
-
-    private fun initSearchView() {
+    private fun initSearchView(pokemons: List<Pokemon>) {
         binding.searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                observePokemonSearch(query)
+                filterPokemon(query, pokemons)
+                UIUtil.hideKeyboard(requireContext(), binding.searchPokemon)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                observePokemonSearch(newText)
+                filterPokemon(newText, pokemons)
                 return true
             }
         })
+    }
+
+    private fun filterPokemon(
+        query: String,
+        pokemons: List<Pokemon>
+    ) {
+        val listFilter = pokemons.filter {
+            it.name.contains(query)
+        }
+        searchAdapter.submitList(listFilter)
     }
 }

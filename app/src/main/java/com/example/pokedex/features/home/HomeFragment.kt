@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.Pokemon

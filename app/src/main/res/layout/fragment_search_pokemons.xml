@@ -23,6 +23,7 @@
         android:background="@drawable/custom_shape_search"
         android:elevation="50dp"
         android:label="@string/app_name"
+        android:focusable="true"
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
