@@ -43,6 +43,7 @@ class SearchAdapter() : ListAdapter<Pokemon, SearchAdapter.SearchViewHolder>(Sea
                 .into(binding.thumbnail)
 
             binding.title.text = pokemon.name.replaceFirstChar { it.uppercase() }
+
         }
     }
 

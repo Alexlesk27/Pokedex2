@@ -16,6 +16,7 @@ import com.example.pokedex.databinding.FragmentSearchPokemonsBinding
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
 import kotlinx.coroutines.launch
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,9 +57,11 @@ class SearchPokemonFragment : Fragment() {
                             searchAdapter.submitList(it.value.pokemon)
                             binding.progressBarContainer.isVisible = false
                         }
-
                         is ListState.Loading -> {
                             binding.progressBarContainer.isVisible = true
+                        }
+                        is ListState.Error->{
+
                         }
                         else -> Unit
                     }
@@ -71,7 +74,7 @@ class SearchPokemonFragment : Fragment() {
         binding.searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 filterPokemon(query, pokemons)
-                UIUtil.hideKeyboard(requireContext(), binding.searchPokemon)
+                UIUtil.hideKeyboard(context, binding.searchPokemon)
                 return true
             }
 
@@ -87,7 +90,7 @@ class SearchPokemonFragment : Fragment() {
         pokemons: List<Pokemon>
     ) {
         val listFilter = pokemons.filter {
-            it.name.contains(query)
+            it.name.startsWith(query, true)
         }
         searchAdapter.submitList(listFilter)
     }
