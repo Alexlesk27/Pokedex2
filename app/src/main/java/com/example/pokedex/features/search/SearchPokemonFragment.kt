@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -64,7 +65,8 @@ class SearchPokemonFragment() : Fragment() {
                             binding.progressBarContainer.isVisible = true
                         }
                         is ListState.Error -> {
-
+                            binding.progressBarContainer.isVisible = false
+                            Toast.makeText(requireContext(), "error: ${it.error}", Toast.LENGTH_SHORT).show()
                         }
                         else -> Unit
                     }
@@ -93,21 +95,16 @@ class SearchPokemonFragment() : Fragment() {
     ) {
         val query = binding.searchPokemon.query
 
-        if (query.isNotEmpty()) {
-            val listFiltered = pokemons.filter {
-                it.name.startsWith(query)
-            }
-            searchAdapter.submitList(listFiltered)
-            searchAdapter.notifyDataSetChanged()
-        } else {
-            searchAdapter.submitList(searchViewModel.listPokemon)
-            searchAdapter.notifyDataSetChanged()
+        val listFiltered = pokemons.filter {
+            it.name.startsWith(query)
         }
+        searchAdapter.submitList(listFiltered)
     }
 
     private fun goDetailsSearch(pokemon: Pokemon) {
         val action =
-            SearchPokemonFragmentDirections.actionSearchPokemonFragmentToDetailsFragment(pokemon.name)
+            SearchPokemonFragmentDirections.
+            actionSearchPokemonFragmentToDetailsFragment(pokemon.name)
         findNavController().navigate(action)
     }
 }

@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-
 interface GetListPokemonSearchInterface{
     suspend fun execute(): Flow<ResponseState>
 }
