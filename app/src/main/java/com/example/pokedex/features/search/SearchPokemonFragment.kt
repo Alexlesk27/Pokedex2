@@ -11,16 +11,16 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.databinding.FragmentSearchPokemonsBinding
 import com.example.pokedex.model.ListState
 import com.example.pokedex.model.Pokemon
 import kotlinx.coroutines.launch
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchPokemonFragment : Fragment() {
+class SearchPokemonFragment() : Fragment() {
     private lateinit var binding: FragmentSearchPokemonsBinding
     private lateinit var searchAdapter: SearchAdapter
     private val searchViewModel: SearchPokemonViewModel by viewModel()
@@ -37,13 +37,16 @@ class SearchPokemonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
         observePokemonSearchFilter()
+        initSearchView()
     }
 
     private fun initRecyclerview() = with(binding) {
         recyclerSearch.layoutManager = LinearLayoutManager(
             activity, LinearLayoutManager.VERTICAL, false
         )
-        searchAdapter = SearchAdapter()
+        searchAdapter = SearchAdapter() {
+            goDetailsSearch(it)
+        }
         recyclerSearch.adapter = searchAdapter
     }
 
@@ -53,14 +56,14 @@ class SearchPokemonFragment : Fragment() {
                 searchViewModel.pokemonSearch.collect {
                     when (it) {
                         is ListState.Success -> {
-                            initSearchView(it.value.pokemon)
+                            searchViewModel.listPokemon = it.value.pokemon
                             searchAdapter.submitList(it.value.pokemon)
                             binding.progressBarContainer.isVisible = false
                         }
                         is ListState.Loading -> {
                             binding.progressBarContainer.isVisible = true
                         }
-                        is ListState.Error->{
+                        is ListState.Error -> {
 
                         }
                         else -> Unit
@@ -70,28 +73,41 @@ class SearchPokemonFragment : Fragment() {
         }
     }
 
-    private fun initSearchView(pokemons: List<Pokemon>) {
-        binding.searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun initSearchView() = with(binding) {
+        searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                filterPokemon(query, pokemons)
-                UIUtil.hideKeyboard(context, binding.searchPokemon)
+                UIUtil.hideKeyboard(context, searchPokemon)
+                filterPokemon(searchViewModel.listPokemon)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                filterPokemon(newText, pokemons)
+                filterPokemon(searchViewModel.listPokemon)
                 return true
             }
         })
     }
 
     private fun filterPokemon(
-        query: String,
         pokemons: List<Pokemon>
     ) {
-        val listFilter = pokemons.filter {
-            it.name.startsWith(query, true)
+        val query = binding.searchPokemon.query
+
+        if (query.isNotEmpty()) {
+            val listFiltered = pokemons.filter {
+                it.name.startsWith(query)
+            }
+            searchAdapter.submitList(listFiltered)
+            searchAdapter.notifyDataSetChanged()
+        } else {
+            searchAdapter.submitList(searchViewModel.listPokemon)
+            searchAdapter.notifyDataSetChanged()
         }
-        searchAdapter.submitList(listFilter)
+    }
+
+    private fun goDetailsSearch(pokemon: Pokemon) {
+        val action =
+            SearchPokemonFragmentDirections.actionSearchPokemonFragmentToDetailsFragment(pokemon.name)
+        findNavController().navigate(action)
     }
 }

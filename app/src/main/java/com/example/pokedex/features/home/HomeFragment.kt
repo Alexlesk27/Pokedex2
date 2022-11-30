@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
             activity,
             2
         )
-        homeAdapter = HomeAdapter(requireContext()) {
+        homeAdapter = HomeAdapter() {
             goToDetailPokemon(it)
         }
         pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(

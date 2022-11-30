@@ -98,6 +98,5 @@ class DetailsFragment : Fragment() {
 
         speedValue.text = pokemonDetails.stats[5].baseStat.toString()
         progressBarSpeed.progress = pokemonDetails.stats[5].baseStat
-
     }
 }

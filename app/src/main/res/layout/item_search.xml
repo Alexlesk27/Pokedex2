@@ -26,10 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/thumbnail"
                 android:layout_centerHorizontal="true"
-                android:text="Título da Live"
                 android:textAlignment="center"
-                android:textColor="#000"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,SpUsage" />
 
             <ImageView
