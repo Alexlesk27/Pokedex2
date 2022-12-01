@@ -1,7 +1,6 @@
 package com.example.pokedex.features.search
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,7 +65,11 @@ class SearchPokemonFragment() : Fragment() {
                         }
                         is ListState.Error -> {
                             binding.progressBarContainer.isVisible = false
-                            Toast.makeText(requireContext(), "error: ${it.error}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "error: ${it.error}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         else -> Unit
                     }
@@ -79,23 +82,21 @@ class SearchPokemonFragment() : Fragment() {
         searchPokemon.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 UIUtil.hideKeyboard(context, searchPokemon)
-                filterPokemon(searchViewModel.listPokemon)
+                filterPokemon()
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                filterPokemon(searchViewModel.listPokemon)
+                filterPokemon()
                 return true
             }
         })
     }
 
-    private fun filterPokemon(
-        pokemons: List<Pokemon>
-    ) {
+    private fun filterPokemon() {
         val query = binding.searchPokemon.query
 
-        val listFiltered = pokemons.filter {
+        val listFiltered = searchViewModel.listPokemon.filter {
             it.name.startsWith(query)
         }
         searchAdapter.submitList(listFiltered)
@@ -103,8 +104,7 @@ class SearchPokemonFragment() : Fragment() {
 
     private fun goDetailsSearch(pokemon: Pokemon) {
         val action =
-            SearchPokemonFragmentDirections.
-            actionSearchPokemonFragmentToDetailsFragment(pokemon.name)
+            SearchPokemonFragmentDirections.actionSearchPokemonFragmentToDetailsFragment(pokemon.name)
         findNavController().navigate(action)
     }
 }

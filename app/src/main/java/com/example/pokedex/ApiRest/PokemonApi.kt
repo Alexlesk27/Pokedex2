@@ -13,8 +13,7 @@ interface PokemonApi {
     ): PokemonResponse
 
     @GET("pokemon/?limit=898&offset=0")
-    suspend fun getListPokemon(
-    ): PokemonResponse
+    suspend fun getListPokemon(): PokemonResponse
 
     @GET("pokemon/{name}")
     suspend fun getDetails(

@@ -16,7 +16,7 @@ class SearchPokemonViewModel(
 
     private var _pokemonSearch = MutableStateFlow<ListState<PokemonResponse>>(ListState.New)
     val pokemonSearch: StateFlow<ListState<PokemonResponse>> = _pokemonSearch.asStateFlow()
-    lateinit var listPokemon: List<Pokemon>
+    var listPokemon: List<Pokemon> = listOf()
 
     init {
         getPokemon()
