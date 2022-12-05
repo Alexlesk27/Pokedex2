@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchPokemonFragment() : Fragment() {
+class SearchPokemonFragment : Fragment() {
     private lateinit var binding: FragmentSearchPokemonsBinding
     private lateinit var searchAdapter: SearchAdapter
     private val searchViewModel: SearchPokemonViewModel by viewModel()
