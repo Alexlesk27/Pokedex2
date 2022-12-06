@@ -1,6 +1,5 @@
 package com.example.pokedex.features.home
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -11,12 +10,11 @@ import com.example.pokedex.model.Pokemon
 import com.squareup.picasso.Picasso
 
 class HomeAdapter(
-    private var context: Context,
     val onclick: (Pokemon) -> Unit
 ) : PagingDataAdapter<Pokemon, HomeAdapter.HomeViewHolder>(HomeCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val layoutInflater = LayoutInflater.from(context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemPokemonBinding.inflate(layoutInflater, parent, false)
         return HomeViewHolder(binding)
     }

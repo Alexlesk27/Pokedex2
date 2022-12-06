@@ -15,7 +15,7 @@ class GetDetailPokemonUseCase(
     override suspend fun execute(name: String): Flow<ResponseState> {
         return flow {
             try {
-                val response = pokemonRepository.getDetaisPokemon(name)
+                val response = pokemonRepository.getDetailsPokemon(name)
                 emit(ResponseState.Success(response))
             }catch (error: Exception){
                 emit(ResponseState.Error(error))

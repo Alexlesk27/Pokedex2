@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.databinding.FragmentHomeBinding
 import com.example.pokedex.model.Pokemon
@@ -40,7 +41,7 @@ class HomeFragment : Fragment() {
             activity,
             2
         )
-        homeAdapter = HomeAdapter(requireContext()) {
+        homeAdapter = HomeAdapter() {
             goToDetailPokemon(it)
         }
         pokemonListRecyclerView.adapter = homeAdapter.withLoadStateFooter(
